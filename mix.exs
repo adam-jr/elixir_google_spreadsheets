@@ -45,7 +45,7 @@ defmodule GSS.Mixfile do
       {:hackney, "~> 1.18"},
       {:httpoison, "~> 2.1"},
       {:gen_stage, "~> 1.2"},
-      {:poison, "~> 5.0"},
+      {:jason, "~> 1.2"},
       {:certifi, "~> 2.9"},
       {:earmark, ">= 0.0.0", only: :dev},
       {:ex_doc, "~> 0.24", only: :dev, runtime: false},

@@ -556,7 +556,7 @@ defmodule GSS.Spreadsheet do
   defp spreadsheet_query_post_batch(url_suffix, request, _options) do
     headers = %{"Authorization" => "Bearer #{GSS.Registry.token()}"}
     params = get_request_params()
-    body = Poison.encode!(request)
+    body = Jason.encode!(request)
     response = Client.request(:post, @api_url_spreadsheet <> url_suffix, body, headers, params)
     spreadsheet_query_response(response)
   end
@@ -564,7 +564,7 @@ defmodule GSS.Spreadsheet do
   @spec spreadsheet_query_response({:ok | :error, %HTTPoison.Response{}}) :: spreadsheet_response
   defp spreadsheet_query_response(response) do
     with {:ok, %{status_code: 200, body: body}} <- response,
-         {:ok, json} <- Poison.decode(body) do
+         {:ok, json} <- Jason.decode(body) do
       {:json, json}
     else
       {:ok, %{status_code: status_code, body: body}} when status_code != 200 ->
@@ -583,7 +583,7 @@ defmodule GSS.Spreadsheet do
     major_dimension = Keyword.get(options, :major_dimension, "ROWS")
     wrap_data = Keyword.get(options, :wrap_data, true)
 
-    Poison.encode!(%{
+    Jason.encode!(%{
       range: range,
       majorDimension: major_dimension,
       values: if(wrap_data, do: [data], else: data)
