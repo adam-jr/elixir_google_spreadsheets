@@ -32,8 +32,7 @@ defmodule GSS.Mixfile do
         :logger,
         :goth,
         :httpoison,
-        :gen_stage,
-        :poison
+        :gen_stage
       ],
       mod: {GSS, []}
     ]
